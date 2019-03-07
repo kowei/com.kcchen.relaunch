@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    id : Plugin識別碼 (for add/remove)
+    version : Plugin版本
+    0.0.1 relauch after update
+    0.0.2 add startActivity and test release
+    0.0.3 make plugin more stand alone
+    0.0.4 add PACKAGE_ADDED listener for open app faster
+    0.0.5 change log
+-->
+<plugin id="com.kcchen.relaunch" version="0.0.5"
+    xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>Relaunch</name>
+    <description>Relaunch APP after update Plugin for Android</description>
+    <license>MIT</license>
+    <keywords>cordova,relaunch</keywords>
+    <repo>https://github.com/gitawego/cordova-screenshot.git</repo>
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+    <!-- android -->
+    <platform name="android">
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <receiver android:name="com.kcchen.relaunch.RelaunchReceiver" android:enabled="true">
+                <intent-filter>
+                    <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                </intent-filter>
+                <intent-filter>
+                    <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                </intent-filter>
+            </receiver>
+        </config-file>
+        <source-file src="src/android/RelaunchReceiver.java" target-dir="src/com/kcchen/relaunch" />
+    </platform>
+</plugin>
